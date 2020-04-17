@@ -163,6 +163,24 @@ Total <%== stash 'total' %> <br/>
 
 	<h1>Colors</h1>
 
+	<header class="ads"><h3 class="inv">Ads</h3>
+
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- envy -->
+			<ins class="adsbygoogle"
+				style="display:block"
+				data-ad-client="ca-pub-8434162582137179"
+				data-ad-slot="1445327895"
+				data-ad-format="auto"
+				data-full-width-responsive="true"></ins>
+		<script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+				
+			<div>
+				<a href="/r/report/report.cgi/badads?&client=8434162582137179&slot=1445327895&ip=<%= $ENV{REMOTE_ADDR} %>&ref=<%= $ENV{HTTP_REFERER} %>" title="Please report inappropriate advertisements">Report inappropriate Ad</a>
+			</div>
+
+	</header>
+
 	<nav>
 		<ul>
 			<li><a href="/index.html" title="Home">Home</a></li>
