@@ -1,5 +1,6 @@
 #!/usr/bin/perl 
 use Mojolicious::Lite; 
+plugin 'Config' => { file => app->home->to_abs() . "/color.conf"};
 helper 'open_file' => sub {
 	my $c = shift;
 	my $cd = ''; $cd = app->home->to_abs();
@@ -133,6 +134,16 @@ Total <%== stash 'total' %> <br/>
 	</ol>
 </section>
 
+@@ ads.html.ep
+<!-- envy -->
+<ins class="adsbygoogle"
+	style="display:block"
+	data-ad-client="ca-pub-8434162582137179"
+	data-ad-slot="1445327895"
+	data-ad-format="auto"
+	data-full-width-responsive="true">
+</ins>
+
 @@ layouts/d.html.ep
 <!doctype html>
 <html lang="en">
@@ -157,27 +168,25 @@ Total <%== stash 'total' %> <br/>
 	nav ul { margin:0; padding:0; clear:both; list-style-type: none;}
 	nav ul li { margin:0.5rem 0.5rem; padding:0.5rem; float :left; clear: right; }
 	nav ul li a { text-decoration: none; }
+	.inv { display: none; }
+	header { margin:0 0 0.5rem 0; padding:0; }
+	header div { text-align: center; margin:0 0 0.5rem 0; padding:0.2rem 0 0 0; clear: both; }
+	header div a { text-decoration: none; color: silver; }
+	header div a:hover { color: gray; }
 </style>
 </head>
 <body>
 
 	<h1>Colors</h1>
 
-	<header class="ads"><h3 class="inv">Ads</h3>
+	<header><h3 class="inv">Ads</h3>
 
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- envy -->
-			<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-client="ca-pub-8434162582137179"
-				data-ad-slot="1445327895"
-				data-ad-format="auto"
-				data-full-width-responsive="true"></ins>
-		<script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
-				
-			<div>
-				<a href="/r/report/report.cgi/badads?&client=8434162582137179&slot=1445327895&ip=<%= $ENV{REMOTE_ADDR} %>&ref=<%= $ENV{HTTP_REFERER} %>" title="Please report inappropriate advertisements">Report inappropriate Ad</a>
-			</div>
+		% if ( config 'show_ads' ) { 
+			%= include 'ads';
+		% }
+		<div>
+			<a href="/r/report/report.cgi/badads?&client=8434162582137179&slot=1445327895&ip=<%= $ENV{REMOTE_ADDR} %>&ref=<%= $ENV{HTTP_REFERER} %>" title="Please report inappropriate advertisements">Please report inappropriate ad(s)</a>
+		</div>
 
 	</header>
 
@@ -212,6 +221,8 @@ Total <%== stash 'total' %> <br/>
 	}
 	</script>
 
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
 </body>
 </html>
 
