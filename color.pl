@@ -15,24 +15,57 @@ helper 'open_file' => sub {
 	return @c;
 };
 # end helper open file
+# helper li
+helper 'li' => sub {
+	my $c = shift;
+	#
+	my ( $letter, @letter) = @_;
+	my %in; my %out; 
+	#
+	%in = (
+		letter => 'a',
+		@_,
+	);
+	for my $line (@letter) { 
+		next if $line =~ /^colour/i;
+		my ($color, $col, $hex, $r, $g, $b, $code) = split(/\|/, $line);
+		$out{out} .= qq~\t<li style="background-color:$hex;">$col, $hex, rgb\($r, $g, $b\)</li>\n~;
+	}
+	#
+	return $out{out};
+};
+# end li
+
 # home page
 get '/' => sub {
 	my $c = shift;
-	my %in; my $out;
+	my %in; my %out; my $out;
 	$in{cd} = app->home->to_abs();
 	my $out = qq{<ol>\n};
 	my @c;
 	@c = $c->open_file();
 	my $serial = '0';
 	my $total = scalar @c;
-	for (sort @c)
+	my @sorted = sort @c;
+	for my $line (@sorted)
 	{
-		chomp;
+		chomp $line;
 		$serial++;
-		next if $_ =~ /^colour/i;
-		my ($color, $col, $hex, $r, $g, $b, $code) = split(/\|/, $_);
-		$out .= qq~\t<li style="background-color:$hex;">$col, $hex, rgb\($r, $g, $b\)</li>\n~;
+		next if $line =~ /^colour/i;
+		my ($color, $col, $hex, $r, $g, $b, $code) = split(/\|/, $line);
+		#$out .= qq~\t<li style="background-color:$hex;">$col, $hex, rgb\($r, $g, $b\)</li>\n~;
+		#
+		for ('a'..'z') {
+			if ( $line =~ /^$_/i) {
+				push(@{$out{"$_"}}, "$line");
+			}
+		}
+		#
 	}
+	#
+	#for (@{$out{"a"}}) { $out .= qq{<li>$_</li>}; }
+	$out .= $c->li( 'a', @{$out{"a"}} );
+	#$out .= $c->li( letter => 'a', @{$out{"a"}} );
 	$out .= qq{</ol>\n};
 	#
 	$c->stash( total => qq{$total} );
