@@ -111,7 +111,7 @@ get '/letter' => sub {
 		#$c->stash( out => "$let No Letter");
 	}
 	#
-	$c->stash( let => "Letter $let");
+	$c->stash( let => "$let");
 	$c->render('letter');
 };
 # end get /letter
@@ -128,7 +128,9 @@ Total <%== stash 'total' %> <br/>
 % layout 'd';
 % title 'Colors ';
 <section><h2><%== stash 'let' %></h2>
-	<%== stash 'out' %>
+	<ol>
+		<%== stash 'out' %>
+	</ol>
 </section>
 
 @@ layouts/d.html.ep
@@ -165,7 +167,7 @@ Total <%== stash 'total' %> <br/>
 		<ul>
 			<li><a href="/index.html" title="Home">Home</a></li>
 			<li><a href="<%= url_for '/' %>" title="Colors Home">Colors Home</a></li>
-			%# no j, q, 
+			%# no j, q, x
 			% for ( 'a' .. 'i', 'k' .. 'p', 'r' .. 't', 'v', 'w', 'y') { 
 				<li> <a href="<%= url_for 'letter' %>?let=<%= $_ %>" title="Get colors alphabetically: <%= $_ %>"><%= $_ %></a> </li> 
 			% }
