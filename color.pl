@@ -36,12 +36,37 @@ helper 'li' => sub {
 };
 # end li
 
+# helper by letter
+helper 'alpha' => sub {
+	my $c = shift;
+	my %in; my %out; my @all; my @letter; 
+	%in = (
+		letter => 'a',
+		@_,
+	);
+	if ($in{letter} ne '') {
+		@all = $c->open_file();
+		for (@all ) { 
+			if ( $_ =~ /^$in{letter}/i ) { 
+				push( @letter, "$_"); 
+			} else {
+				##push( @letter, " 53 No Match ");
+				$out{letter} = qq{53 No Match };
+			}
+		}
+	}
+	#
+	$out{letter} = $c->li("$in{letter}", @letter );
+	#
+	return $out{letter};
+};
+
 # home page
 get '/' => sub {
 	my $c = shift;
 	my %in; my %out; my $out;
 	$in{cd} = app->home->to_abs();
-	my $out = qq{<ol>\n};
+	$out = qq{<ol>\n};
 	my @c;
 	@c = $c->open_file();
 	my $serial = '0';
@@ -73,6 +98,23 @@ get '/' => sub {
 	#
 	$c->render('color');
 };
+# end get /
+
+# begin get /letter
+get '/letter' => sub {
+	my $c = shift;
+	my $let = $c->param('let');
+	chomp $let;
+	if ( $let ) {
+		$c->stash( out => $c->alpha( letter => "$let") );
+	} else {
+		#$c->stash( out => "$let No Letter");
+	}
+	#
+	$c->stash( let => "Letter $let");
+	$c->render('letter');
+};
+# end get /letter
 app->start;
 1;
 __DATA__
@@ -81,6 +123,13 @@ __DATA__
 % title 'Colors';
 Total <%== stash 'total' %> <br/> 
 <%== stash 'out' %>
+
+@@ letter.html.ep
+% layout 'd';
+% title 'Colors ';
+<section><h2><%== stash 'let' %></h2>
+	<%== stash 'out' %>
+</section>
 
 @@ layouts/d.html.ep
 <!doctype html>
@@ -115,7 +164,11 @@ Total <%== stash 'total' %> <br/>
 	<nav>
 		<ul>
 			<li><a href="/index.html" title="Home">Home</a></li>
-			<li><a href="color.pl" title="Colors Home">Colors</a></li>
+			<li><a href="<%= url_for '/' %>" title="Colors Home">Colors Home</a></li>
+			%# no j, q, 
+			% for ( 'a' .. 'i', 'k' .. 'p', 'r' .. 't', 'v', 'w', 'y') { 
+				<li> <a href="<%= url_for 'letter' %>?let=<%= $_ %>" title="Get colors alphabetically: <%= $_ %>"><%= $_ %></a> </li> 
+			% }
 		</ul>
 	</nav>
 
