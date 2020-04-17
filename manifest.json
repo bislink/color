@@ -1,0 +1,23 @@
+{
+  "background_color": "black",
+  "description": "Colors MSN.ENVY .a1z.us -  A1Z Hosting - a1z.us",
+  "display": "standalone",
+	"theme_color": "black",
+  "icons": [
+    {
+      "src": "/c/colors/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+	{
+      "src": "/c/colors/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "name": "Colors MSN.ENVY .a1z.us - https://msn.envy.a1z.us:12004/c/colors/color.pl",
+  "short_name": "Colors MSN.ENVY .A1Z.us",
+  "start_url": "/c/colors/index.html?pwa=colors.msn.envy.a1z.us",
+  "scope": "/c/colors/"
+}
+
