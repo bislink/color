@@ -1,7 +1,7 @@
 {
   "name": "colors",
   "version": "0.0.8",
-  "description": "Colors, arranged alphabetically",
+  "description": "Colors, arranged alphabetically. To see colors starting with the letter a, click a. Also provides color names in hex and rgb format",
   "main": "sw.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,10 +11,14 @@
     "url" : "https://github.com/bislink/color.git"
   },
   "dependencies": {
-    "Perl": ">5.10.1",
-    "Mojolicious": ">8.0"
+    "Strawberry Perl": ">=5.14.4.1",
+    "Mojolicious": ">=8.0"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["web colors", "hex format", "rgb format", "Mojolicious", "Perl", "Perl Best Practices: Open File", "Strawberry"],
+  "author": { 
+    "name": "Sudheer Murthy",
+    "email": "github@bislinks.com",
+    "url": "https://www.a1z.us"
+  },
   "license": "ISC"
 }
