@@ -6,3 +6,5 @@ Installation
         Download/clone this repo into your IIS Directory:  
             Either C:/inetpub/wwwroot or C:/Users/User/public
         Access on a browser: http://localhost/c/color/color.pl
+        Install Mojolicious as Administrator: 
+            cpan Mojolicious
