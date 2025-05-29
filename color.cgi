@@ -152,7 +152,7 @@ Total <%== stash 'total' %> <br/>
 <meta charset="utf-8">
 <meta name="description" content="Colors - A1Z Hosting - www.a1z.us">
 <meta name="keywords" content="hex and rgb colors, A1z, hosting, backup, blog, business, personal, charity">
-<link rel="manifest" href="/c/colors/manifest.json">
+<link rel="manifest" href="/c/color/manifest.json">
 <meta name="theme-color" content="#B12A34">
 <link rel="apple-touch-icon" href="/favicon.ico">
 <meta name="Robots" content="INDEX,FOLLOW">
@@ -213,7 +213,7 @@ Total <%== stash 'total' %> <br/>
 	// register service worker
 	if ('serviceWorker' in navigator) {
 			window.addEventListener('load', () => {
-			navigator.serviceWorker.register('/c/colors/sw.js')
+			navigator.serviceWorker.register('/c/color/sw.js')
 			.then((reg) => {
 			console.log('Colors on https://msn.envy.a1z.us:12004 is ready. ', reg);
 			});
